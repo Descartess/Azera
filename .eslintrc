@@ -1,0 +1,14 @@
+{
+    "extends": "airbnb",
+    "env": {
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "browser": true
+    },
+    "rules": {
+        "jsx-a11y/href-no-hash": "off",
+        "linebreak-style": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
+}
