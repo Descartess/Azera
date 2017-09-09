@@ -1,41 +1,47 @@
-const INITIAL_STATE = {
+import { Map } from "immutable";
+import {
+    LOGIN_SUCCESS,
+    LOGIN_FAILED,
+    LOGOUT
+} from "../constants";
+
+const INITIAL_STATE = Map({
   loading: false,
   token: null,
   authenticated: false,
-};
+  userName: "",
+  error: null
+});
 
-export default (state = INITIAL_STATE, action) => {
+export default (state=INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'REGISTER_PENDING':
-      return { ...state, loading: true };
-    case 'REGISTER_REJECTED':
-      return { ...state, loading: false, error: true };
-    case 'REGISTER_FULFILLED':
-      return {
-        ...state,
-        loading: false,
-        token: action.payload.data.token,
-        authenticated: true,
-      };
-    case 'SIGNIN_PENDING':
-      return { ...state, loading: true };
-    case 'SIGNIN_REJECTED':
-      return { ...state, loading: true, error: true };
-    case 'SIGNIN_FULFILLED':
-      return {
-        ...state,
-        loading: false,
-        token: action.payload.data.token,
-        authenticated: true,
-      };
-    case 'SIGNOUT_FULFILLED':
-      return { ...INITIAL_STATE };
-    case 'RESETPASSWORD_FULFILLED':
-      return {
-        ...state,
-        loading: false,
-        token: action.payload.data.token,
-      };
+    case LOGIN_SUCCESS:
+      return (
+          state.merge(Map({
+            loading: false,
+            authenticated: true,
+            token: action.user.uid,
+            userName: action.user.displayName
+          }))
+      );
+    case LOGIN_FAILED:
+      return (
+          state.merge(Map({
+            loading: false,
+            authenticated: false,
+            error: action.error
+          }))
+      );
+    case LOGOUT:
+      return (
+          state.merge(Map({
+            loading: false,
+            authenticated: false,
+            error: null,
+            token: null,
+            userName: ""
+          }))
+      );
     default:
       return state;
   }

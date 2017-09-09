@@ -1,40 +1,60 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react';
-import Stats from '../components/stats';
-import HeaderBar from '../components/header';
-import ReceiptCard from '../components/card';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as authActions from "../actions/authActions";
+
+import { googleProvider, firebaseAuth } from '../config/firebase';
+import Home from '../components/Home';
+import Login from '../components/Login';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  handleGoogleLogin() {
+    firebaseAuth().signInWithRedirect(googleProvider)
+        .catch((error) => {
+          this.props.authAction.loginFailed(error);
+        });
+    localStorage.setItem("firebaseAuthKey", "1");
   }
+
+  handleLogout() {
+    firebaseAuth().signOut();
+    localStorage.clear();
+    this.props.authAction.logOut();
+  }
+
+  componentWillMount() {
+    firebaseAuth().onAuthStateChanged((user) => {
+      if(user) {
+        this.props.authAction.loginSuccess(user);
+        localStorage.setItem("authToken", user.uid);
+      }
+    });
+  }
+
   render() {
     return (
-      <Grid className="full-height">
-        <Grid.Column width={3} className="column1">
-          <Grid.Row>
-            <div className="logo">
-              <p>AZERA</p>
-            </div>
-          </Grid.Row>
-          <div className="left-bar">
-            <Stats />
-            <Stats />
-            <Stats />
-          </div>
-        </Grid.Column >
-        <Grid.Column width={13} className="column2">
-          <HeaderBar />
-          <Grid.Row>
-            <div className="main-body">
-              <ReceiptCard />
-            </div>
-          </Grid.Row>
-        </Grid.Column>
-      </Grid>
+      (localStorage.getItem("firebaseAuthKey") === "1") ?
+          <Home
+              handleLogout={this.handleLogout.bind(this)}
+          />
+              :
+          <Login
+              handleGoogleLogin={this.handleGoogleLogin.bind(this)}
+          />
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    authAction: bindActionCreators(authActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
