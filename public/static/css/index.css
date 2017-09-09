@@ -55,6 +55,7 @@ body{
   align-items: center;
   justify-content: space-between;
 }
+
 .logo {
   background: #303F9F;
   padding: 15px;
@@ -78,4 +79,12 @@ body{
   align-items: center;
   justify-content: space-around;
   padding-top: 5px;
+}
+
+.login{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
