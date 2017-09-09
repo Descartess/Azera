@@ -3,7 +3,6 @@ import { Grid } from 'semantic-ui-react';
 import Stats from '../components/stats';
 import Header from '../components/header';
 import ReceiptCard from '../components/card';
-import { Button } from 'semantic-ui-react';
 import Search from './search';
 
 class Home extends Component {
@@ -27,6 +26,8 @@ class Home extends Component {
                     <Search />
                     <Grid.Row>
                         <div className="main-body">
+                            <ReceiptCard />
+                            <ReceiptCard />
                             <ReceiptCard />
                         </div>
                     </Grid.Row>

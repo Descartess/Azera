@@ -1,3 +1,6 @@
+body{
+  margin:0;
+}
 
 .dark-primary-color    { background: #303F9F; }
 .default-primary-color { background: #3F51B5; }
@@ -7,7 +10,6 @@
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
-
 
 .full-height {
   height: 100vh;
@@ -19,16 +21,11 @@
   padding-top: 0 !important;
   padding-right: 0 !important;
 }
-.item {
-  border: 10px border-style color;
-}
+
 .column2 {
   padding-top: 0 !important;
   padding-right: 0 !important;
   padding-left: 0 !important;
-}
-body{
-  margin:0px;
 }
 
 .stats {
@@ -93,10 +90,9 @@ body{
 
 }
 
-.reciept-search {
-  margin-top: 60px;
-  margin-left:50px; 
-  width: 500px; 
+.receipt-search {
+  margin: 40px 50px 40px 0;
+  width: 500px;
   align-items: center;
 }
 
