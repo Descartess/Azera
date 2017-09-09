@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Stats from '../components/stats';
-import HeaderBar from '../components/header';
+import Header from '../components/header';
 import ReceiptCard from '../components/card';
 import { Button } from 'semantic-ui-react';
+import Search from './search';
 
 class Home extends Component {
     render() {
@@ -22,11 +23,11 @@ class Home extends Component {
                     </div>
                 </Grid.Column >
                 <Grid.Column width={13} className="column2">
-                    <HeaderBar />
+                    <Header />
+                    <Search />
                     <Grid.Row>
                         <div className="main-body">
                             <ReceiptCard />
-                            <Button onClick={this.props.handleLogout}>Logout</Button>
                         </div>
                     </Grid.Row>
                 </Grid.Column>
