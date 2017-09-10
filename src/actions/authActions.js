@@ -1,25 +1,25 @@
 import {
-    LOGIN_FAILED,
-    LOGIN_SUCCESS,
-    LOGOUT
+  LOGIN_FAILED,
+  LOGIN_SUCCESS,
+  LOGOUT,
 } from '../constants';
 
 export function loginFailed(error) {
-    return {
-        type: LOGIN_FAILED,
-        error: error.message
-    }
+  return {
+    type: LOGIN_FAILED,
+    error: error.message,
+  };
 }
 
 export function loginSuccess(user) {
-    return {
-        type: LOGIN_SUCCESS,
-        user: user
-    }
+  return {
+    type: LOGIN_SUCCESS,
+    user,
+  };
 }
 
 export function logOut() {
-    return {
-        type: LOGOUT
-    }
+  return {
+    type: LOGOUT,
+  };
 }
