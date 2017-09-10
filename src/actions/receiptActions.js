@@ -5,7 +5,9 @@ import {
     ACCEPT_RECEIPT_CONFIRM,
     REJECT_RECEIPT_REQUEST,
     REJECT_RECEIPT_CLOSE,
-    REJECT_RECEIPT_CONFIRM
+    REJECT_RECEIPT_CONFIRM,
+    RECEIPT_DETAILS,
+    RECEIPT_DETAIL_CLOSE
 } from '../constants';
 import { database } from '../config/firebase';
 
@@ -64,5 +66,17 @@ export function confirmRejection(receipt) {
     database().ref().update(update).then(() => {
       dispatch({type: REJECT_RECEIPT_CONFIRM});
     });
+  }
+}
+
+export function handleDetails() {
+  return {
+    type: RECEIPT_DETAILS
+  }
+}
+
+export function handleDetailsClose() {
+  return {
+    type: RECEIPT_DETAIL_CLOSE
   }
 }

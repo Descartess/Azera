@@ -1,12 +1,14 @@
 import { Map, List, fromJS } from 'immutable';
 import {
-  GET_RECEIPTS_SUCCESS,
-  ACCEPT_RECEIPT_REQUEST,
-  ACCEPT_RECEIPT_CLOSE,
-  ACCEPT_RECEIPT_CONFIRM,
-  REJECT_RECEIPT_REQUEST,
-  REJECT_RECEIPT_CLOSE,
-  REJECT_RECEIPT_CONFIRM,
+    GET_RECEIPTS_SUCCESS,
+    ACCEPT_RECEIPT_REQUEST,
+    ACCEPT_RECEIPT_CLOSE,
+    ACCEPT_RECEIPT_CONFIRM,
+    REJECT_RECEIPT_REQUEST,
+    REJECT_RECEIPT_CLOSE,
+    REJECT_RECEIPT_CONFIRM,
+    RECEIPT_DETAILS,
+    RECEIPT_DETAIL_CLOSE
 } from '../constants';
 
 
@@ -15,6 +17,7 @@ const initialState = Map({
   showAccept: false,
   showReject: false,
   selectedReceipt: null,
+  showDetails: false,
 });
 
 export default(state = initialState, action) => {
@@ -67,6 +70,18 @@ export default(state = initialState, action) => {
           showReject: false,
           selectedReceipt: null,
         }))
+      );
+    case RECEIPT_DETAILS:
+        return (
+            state.merge(Map({
+                showDetails: true
+            }))
+        );
+    case RECEIPT_DETAIL_CLOSE:
+      return (
+          state.merge(Map({
+              showDetails: false
+          }))
       );
     default:
       return state;

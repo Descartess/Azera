@@ -36,6 +36,14 @@ class Home extends Component {
     this.props.receiptActions.confirmRejection(this.props.selectedReceipt);
   }
 
+  handleDetails() {
+    this.props.receiptActions.handleDetails();
+  }
+
+  handleDetailsClose() {
+    this.props.receiptActions.handleDetailsClose();
+  }
+
   componentWillMount() {
     this.props.receiptActions.getReceipts();
   }
@@ -47,19 +55,22 @@ class Home extends Component {
 
     let receiptCards;
     receiptCards = receipts.map((receipt, index) => (
-      <Grid.Column width={4} key={index}>
-        <ReceiptCard
-          {...receipt}
-          showAccept={this.props.showAccept}
-          showReject={this.props.showReject}
-          handleAccept={this.handleAccept.bind(this, receipt)}
-          confirmAccept={this.confirmAccept.bind(this)}
-          handleAcceptClose={this.handleAcceptClose.bind(this)}
-          handleReject={this.handleReject.bind(this, receipt)}
-          handleRejectClose={this.handleRejectClose.bind(this)}
-          confirmRejection={this.confirmRejection.bind(this, receipt)}
-        />
-      </Grid.Column>
+        <Grid.Column width={4} key={index}>
+          <ReceiptCard
+              {...receipt}
+              showAccept={this.props.showAccept}
+              showReject={this.props.showReject}
+              showDetails={this.props.showDetails}
+              handleAccept={this.handleAccept.bind(this, receipt)}
+              confirmAccept={this.confirmAccept.bind(this)}
+              handleAcceptClose={this.handleAcceptClose.bind(this)}
+              handleReject={this.handleReject.bind(this, receipt)}
+              handleRejectClose={this.handleRejectClose.bind(this)}
+              confirmRejection={this.confirmRejection.bind(this, receipt)}
+              handleDetails={this.handleDetails.bind(this)}
+              handleDetailsClose={this.handleDetailsClose.bind(this)}
+          />
+        </Grid.Column>
     ));
 
     return (
@@ -125,15 +136,17 @@ function mapStateToProps(state) {
   const receipt_stats = _.countBy(receipts, c => c.status);
   const showAccept = state.receipts.toJS().showAccept;
   const showReject = state.receipts.toJS().showReject;
+  const showDetails = state.receipts.toJS().showDetails;
   const selectedReceipt = state.receipts.toJS().selectedReceipt;
   return {
     receipts_array,
     receipt_stats,
     showAccept,
     showReject,
-    selectedReceipt,
     START,
     END,
+    showDetails,
+    selectedReceipt
   };
 }
 
