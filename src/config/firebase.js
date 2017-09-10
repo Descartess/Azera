@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 
 const config = {
-    apiKey: "AIzaSyDLPkz9WLHOYqfphFe1Zd5RPc2QIMm612c",
-    authDomain: "fire-ef540.firebaseapp.com",
-    databaseURL: "https://fire-ef540.firebaseio.com",
-    projectId: "fire-ef540",
-    storageBucket: "fire-ef540.appspot.com",
-    messagingSenderId: "329150926089"
+    apiKey: "AIzaSyAYWrGZYw9zVcmDSaT8lZyby4iQJlyBfW4",
+    authDomain: "azera-30f0b.firebaseapp.com",
+    databaseURL: "https://azera-30f0b.firebaseio.com",
+    projectId: "azera-30f0b",
+    storageBucket: "azera-30f0b.appspot.com",
+    messagingSenderId: "1000052007071"
 };
 
 firebase.initializeApp(config);
