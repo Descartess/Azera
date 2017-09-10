@@ -1,9 +1,9 @@
 import React from 'react';
 import { Statistic } from 'semantic-ui-react';
 
-const Stats = () => (
+const Stats = props => (
   <div className="stats">
-    <Statistic value="500" label="Receipts" />
+    <Statistic value={props.value} label= {props.label} />
   </div>
 );
 
