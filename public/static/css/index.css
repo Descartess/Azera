@@ -103,3 +103,8 @@ body{
 .padding-top {
   padding-top: 4.5em;
 }
+
+.cropped {
+  max-height: 320px !important;
+  overflow: hidden !important;
+}

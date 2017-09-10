@@ -8,7 +8,7 @@ import ReceiptDetail from './receiptDetail';
 const ReceiptCard = (props) => (
     <div>
         <Card>
-            <Image src={props.imageUrl}/>
+            <Image src={props.imageUrl} className="ui medium image"/>
             <Card.Content>
                 <Icon className="right floated close red circular icon" onClick={props.handleReject} title="Reject"/>
                 <Icon className="right floated check green circular icon" onClick={props.handleAccept} title="Approve"/>
@@ -20,7 +20,7 @@ const ReceiptCard = (props) => (
                     {new Date(props.createdAt).toDateString()}
                 </Card.Meta>
                 <Card.Description>
-                    Daniel is a comedian living in Nashville.
+                    {props.description}
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>

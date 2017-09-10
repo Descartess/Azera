@@ -6,7 +6,7 @@ const ReceiptDetail = (props) => (
         <Modal basic size='small' open={props.showDetails}>
             <Header content='Receipt Details' />
             <Modal.Content>
-                <Image src={props.imageUrl}/>
+                <Image src={props.imageUrl} className="ui fluid image"/>
             </Modal.Content>
             <Modal.Actions>
                 <Button basic color='red' inverted onClick={props.handleDetailsClose}>
