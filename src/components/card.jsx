@@ -16,7 +16,7 @@ const ReceiptCard = (props) => (
                     {props.category}
                 </Card.Header>
                 <Card.Meta>
-                    {props.createdAt}
+                    {new Date(props.createdAt).toDateString()}
                 </Card.Meta>
                 <Card.Description>
                     Daniel is a comedian living in Nashville.
@@ -42,7 +42,6 @@ const ReceiptCard = (props) => (
             showReject={props.showReject}
         />
     </div>
-
 );
 
 export default ReceiptCard;
