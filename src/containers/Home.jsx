@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 import * as receiptActions from '../actions/receiptActions';
+import * as pageActions from '../actions/paginationActions';
 import StatsHolder from '../components/stats_holder';
 import Header from '../components/header';
 import ReceiptCard from '../components/card';
@@ -20,7 +21,7 @@ class Home extends Component {
   }
 
   confirmAccept() {
-    this.props.receiptActions.confirmAccept(this.props.selectedReceipt)
+    this.props.receiptActions.confirmAccept(this.props.selectedReceipt);
   }
 
   handleReject(receipt) {
@@ -32,7 +33,7 @@ class Home extends Component {
   }
 
   confirmRejection() {
-    this.props.receiptActions.confirmRejection(this.props.selectedReceipt)
+    this.props.receiptActions.confirmRejection(this.props.selectedReceipt);
   }
 
   componentWillMount() {
@@ -40,24 +41,25 @@ class Home extends Component {
   }
 
   render() {
-    const { receipt_stats, receipts_array } = this.props;
-    let receipts = receipts_array.slice(0,3);
+    const { receipt_stats, receipts_array, START, END } = this.props;
+    const { nextPage, prevPage } = this.props.pageActions;
+    const receipts = receipts_array.slice(START, END);
 
     let receiptCards;
     receiptCards = receipts.map((receipt, index) => (
-        <Grid.Column width={4} key={index}>
-          <ReceiptCard
-              {...receipt}
-              showAccept={this.props.showAccept}
-              showReject={this.props.showReject}
-              handleAccept={this.handleAccept.bind(this, receipt)}
-              confirmAccept={this.confirmAccept.bind(this)}
-              handleAcceptClose={this.handleAcceptClose.bind(this)}
-              handleReject={this.handleReject.bind(this, receipt)}
-              handleRejectClose={this.handleRejectClose.bind(this)}
-              confirmRejection={this.confirmRejection.bind(this, receipt)}
-          />
-        </Grid.Column>
+      <Grid.Column width={4} key={index}>
+        <ReceiptCard
+          {...receipt}
+          showAccept={this.props.showAccept}
+          showReject={this.props.showReject}
+          handleAccept={this.handleAccept.bind(this, receipt)}
+          confirmAccept={this.confirmAccept.bind(this)}
+          handleAcceptClose={this.handleAcceptClose.bind(this)}
+          handleReject={this.handleReject.bind(this, receipt)}
+          handleRejectClose={this.handleRejectClose.bind(this)}
+          confirmRejection={this.confirmRejection.bind(this, receipt)}
+        />
+      </Grid.Column>
     ));
 
     return (
@@ -91,10 +93,18 @@ class Home extends Component {
             <Grid>
               <Grid.Column width={6} />
               <Grid.Column width={2}>
-                <Icon name="left arrow" className="violet circular icon large inverted" />
+                <Icon
+                  name="left arrow"
+                  className="violet circular icon large inverted"
+                  onClick={() => prevPage()}
+                />
               </Grid.Column>
               <Grid.Column width={2}>
-                <Icon name="right arrow" className="violet circular icon large inverted" />
+                <Icon
+                  name="right arrow"
+                  className="violet circular icon large inverted"
+                  onClick={() => nextPage()}
+                />
               </Grid.Column>
               <Grid.Column width={6} />
             </Grid>
@@ -107,6 +117,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   const receipts_obj = state.receipts.toJS();
+  const { START, END } = state.pages;
   const { receipts } = receipts_obj;
   const receipts_array = _.map(receipts, (val, uid) => (
     { ...val, uid }
@@ -120,13 +131,16 @@ function mapStateToProps(state) {
     receipt_stats,
     showAccept,
     showReject,
-    selectedReceipt
+    selectedReceipt,
+    START,
+    END,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     receiptActions: bindActionCreators(receiptActions, dispatch),
+    pageActions: bindActionCreators(pageActions, dispatch),
   };
 }
 
