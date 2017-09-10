@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-class Login extends Component {
-    render() {
-        return (
-            <div className="login dark-primary-color">
-                <span className="logo2">
+const Login = (props) => (
+    <div className="login dark-primary-color">
+                <span className="logo">
                     AZERA
                 </span>
-                <Button basic color='teal' size='massive' onClick={this.props.handleGoogleLogin}>
-                    Login/SignIn
-                </Button>
-            </div>
-        );
-    }
-}
+        <Button basic color='teal' size='massive' onClick={props.handleGoogleLogin}>
+            Login/SignIn
+        </Button>
+    </div>
+);
 
 export default Login;

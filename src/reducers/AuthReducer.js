@@ -9,7 +9,7 @@ const INITIAL_STATE = Map({
   loading: false,
   token: null,
   authenticated: false,
-  userName: "",
+  currentUser: "",
   error: null
 });
 
@@ -21,7 +21,7 @@ export default (state=INITIAL_STATE, action) => {
             loading: false,
             authenticated: true,
             token: action.user.uid,
-            userName: action.user.displayName
+            currentUser: action.user.displayName
           }))
       );
     case LOGIN_FAILED:
@@ -39,7 +39,7 @@ export default (state=INITIAL_STATE, action) => {
             authenticated: false,
             error: null,
             token: null,
-            userName: ""
+            currentUser: ""
           }))
       );
     default:

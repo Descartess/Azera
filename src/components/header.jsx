@@ -1,21 +1,15 @@
 import React from 'react';
 
-const Header = () => (
+const Header = (props) => (
   <div className="logo2">
     <div className="ui horizontal medium divided list">
       <div className="item">
           <i className="user icon"/>
           <div className="middle aligned content">
-              Paul
+              { props.currentUser }
           </div>
       </div>
-      <div className="item">
-          <i className="setting icon"/>
-          <div className="middle aligned content">
-              Account settings
-          </div>
-      </div>
-      <div className="item">
+      <div className="item" onClick={props.handleLogout}>
           <i className="arrow left circle icon"/>
           <div className="middle aligned content">
               Logout

@@ -99,3 +99,7 @@ body{
 .items {
   display: flex;
 }
+
+.padding-top {
+  padding-top: 4.5em;
+}

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as authActions from "../actions/authActions";
 
 import { googleProvider, firebaseAuth } from '../config/firebase';
-import Home from '../components/Home';
+import Home from './Home';
 import Login from '../components/Login';
 
 class App extends Component {
@@ -35,6 +35,7 @@ class App extends Component {
     return (
       (localStorage.getItem("firebaseAuthKey") === "1") ?
           <Home
+              currentUser={this.props.auth.currentUser}
               handleLogout={this.handleLogout.bind(this)}
           />
               :
@@ -47,7 +48,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth.toJS()
   };
 }
 
