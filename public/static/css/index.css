@@ -108,3 +108,7 @@ body{
   max-height: 320px !important;
   overflow: hidden !important;
 }
+
+.pointer {
+  cursor: pointer;
+}

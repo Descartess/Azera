@@ -10,9 +10,12 @@ const ReceiptCard = (props) => (
         <Card>
             <Image src={props.imageUrl} className="ui medium image"/>
             <Card.Content>
-                <Icon className="right floated close red circular icon" onClick={props.handleReject} title="Reject"/>
-                <Icon className="right floated check green circular icon" onClick={props.handleAccept} title="Approve"/>
-                <Icon className="right floated eye circular icon" onClick={props.handleDetails} title="View Details"/>
+                <Icon className="right floated close red circular icon pointer"
+                      onClick={props.handleReject} title="Reject"/>
+                <Icon className="right floated check green circular icon pointer"
+                      onClick={props.handleAccept} title="Approve"/>
+                <Icon className="right floated eye circular icon pointer"
+                      onClick={props.handleDetails} title="View Details"/>
                 <Card.Header>
                     {props.category}
                 </Card.Header>

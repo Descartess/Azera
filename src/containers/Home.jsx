@@ -44,6 +44,10 @@ class Home extends Component {
     this.props.receiptActions.handleDetailsClose();
   }
 
+  showPending() {
+    this.props.receiptActions.showPending();
+  }
+
   componentWillMount() {
     this.props.receiptActions.getReceipts();
   }
@@ -81,7 +85,10 @@ class Home extends Component {
               <p>AZERA</p>
             </div>
           </Grid.Row>
-          <StatsHolder data={receipt_stats} />
+          <StatsHolder
+              data={receipt_stats}
+              showPending={this.showPending.bind(this)}
+          />
         </Grid.Column >
         <Grid.Column width={13} className="column2">
           <Grid.Row>

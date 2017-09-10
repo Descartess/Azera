@@ -8,9 +8,9 @@ const StatsHolder = (props) => {
   }
   return (
     <div className="left-bar">
-      <Stats value={props.data.accepted} label={'Accepted'} />
-      <Stats value={props.data.pending} label={'Pending'} />
-      <Stats value={props.data.rejected} label={'Rejected'} />
+      <Stats value={props.data.pending} label={'Pending'} showPending={props.showPending}/>
+      <Stats value={props.data.accepted} label={'Accepted'} className="pointer"/>
+      <Stats value={props.data.rejected} label={'Rejected'} className="pointer"/>
     </div>
   );
 };

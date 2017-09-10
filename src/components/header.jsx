@@ -9,7 +9,7 @@ const Header = (props) => (
               { props.currentUser }
           </div>
       </div>
-      <div className="item" onClick={props.handleLogout}>
+      <div className="item pointer" onClick={props.handleLogout}>
           <i className="arrow left circle icon"/>
           <div className="middle aligned content">
               Logout
