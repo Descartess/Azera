@@ -1,12 +1,12 @@
 import { Map, List, fromJS } from 'immutable';
 import {
-    GET_RECEIPTS_SUCCESS,
-    ACCEPT_RECEIPT_REQUEST,
-    ACCEPT_RECEIPT_CLOSE,
-    ACCEPT_RECEIPT_CONFIRM,
-    REJECT_RECEIPT_REQUEST,
-    REJECT_RECEIPT_CLOSE,
-    REJECT_RECEIPT_CONFIRM
+  GET_RECEIPTS_SUCCESS,
+  ACCEPT_RECEIPT_REQUEST,
+  ACCEPT_RECEIPT_CLOSE,
+  ACCEPT_RECEIPT_CONFIRM,
+  REJECT_RECEIPT_REQUEST,
+  REJECT_RECEIPT_CLOSE,
+  REJECT_RECEIPT_CONFIRM,
 } from '../constants';
 
 
@@ -14,7 +14,7 @@ const initialState = Map({
   receipts: List(),
   showAccept: false,
   showReject: false,
-  selectedReceipt: null
+  selectedReceipt: null,
 });
 
 export default(state = initialState, action) => {
@@ -27,45 +27,45 @@ export default(state = initialState, action) => {
       );
     case ACCEPT_RECEIPT_REQUEST:
       return (
-          state.merge(Map({
-            showAccept: true,
-            selectedReceipt: action.payload
-          }))
+        state.merge(Map({
+          showAccept: true,
+          selectedReceipt: action.payload,
+        }))
 
       );
     case ACCEPT_RECEIPT_CLOSE:
       return (
-          state.merge(Map({
-            showAccept: false,
-            selectedReceipt: null
-          }))
+        state.merge(Map({
+          showAccept: false,
+          selectedReceipt: null,
+        }))
       );
     case ACCEPT_RECEIPT_CONFIRM:
       return (
         state.merge(Map({
           showAccept: false,
-          selectedReceipt: null
+          selectedReceipt: null,
         }))
       );
     case REJECT_RECEIPT_REQUEST:
       return (
-          state.merge(Map({
-            showReject: true,
-            selectedReceipt: action.payload
-          }))
+        state.merge(Map({
+          showReject: true,
+          selectedReceipt: action.payload,
+        }))
       );
     case REJECT_RECEIPT_CLOSE:
       return (
-          state.merge(Map({
-            showReject: false,
-            selectedReceipt: null
-          }))
+        state.merge(Map({
+          showReject: false,
+          selectedReceipt: null,
+        }))
       );
     case REJECT_RECEIPT_CONFIRM:
       return (
         state.merge(Map({
           showReject: false,
-          selectedReceipt: null
+          selectedReceipt: null,
         }))
       );
     default:
