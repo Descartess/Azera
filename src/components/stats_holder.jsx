@@ -3,7 +3,6 @@ import _ from 'lodash';
 import Stats from './stats';
 
 const StatsHolder = (props) => {
-  console.log(props.data);
   if (_.isEmpty(props.data)) {
     return <p className="left-bar"> Statistics Unavailable </p>;
   }

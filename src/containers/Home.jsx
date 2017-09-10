@@ -9,14 +9,24 @@ import StatsHolder from '../components/stats_holder';
 import Header from '../components/header';
 import ReceiptCard from '../components/card';
 import Search from '../components/search';
+import ReceiptsHolder from '../components/receiptsHolder';
+
+function viewReceipts(receipts) {
+  return receipts.map(receipt => (
+    <Grid.Column width={4}>
+      <ReceiptCard {...receipt} />
+    </Grid.Column>
+  ));
+}
 
 class Home extends Component {
   componentWillMount() {
     this.props.receiptActions.getReceipts();
   }
   render() {
-    // console.log(this.props.receipts);
-    const { receipt_stats } = this.props;
+    const { receipt_stats, receipts_array } = this.props;
+    console.log(typeof(receipts_array));
+    console.log(receipts_array);
     return (
       <Grid className="full-height">
         <Grid.Column width={3} className="column1">
@@ -40,15 +50,7 @@ class Home extends Component {
           <Grid.Row className="padding-top">
             <Grid>
               <Grid.Column width={2} />
-              <Grid.Column width={4}>
-                <ReceiptCard />
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <ReceiptCard />
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <ReceiptCard />
-              </Grid.Column>
+              {viewReceipts(receipts_array.slice(0, 3))}
               <Grid.Column width={2} />
             </Grid>
           </Grid.Row>
@@ -73,9 +75,12 @@ class Home extends Component {
 function mapStateToProps(state) {
   const receipts_obj = state.receipts.toJS();
   const { receipts } = receipts_obj;
+  const receipts_array = _.map(receipts, (val, uid) => (
+    { ...val, uid }
+  ));
   const receipt_stats = _.countBy(receipts, c => c.status);
   return {
-    receipts,
+    receipts_array,
     receipt_stats,
   };
 }
