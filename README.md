@@ -30,7 +30,7 @@ npm start
 ```
 
 ## Features 
-* Users can sigin of the application
+* Users can sign into the application
 * Users can view and accept receipts
 * Users can signout of application
 * Users can reset passwords
