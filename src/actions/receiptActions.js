@@ -7,7 +7,10 @@ import {
     REJECT_RECEIPT_CLOSE,
     REJECT_RECEIPT_CONFIRM,
     RECEIPT_DETAILS,
-    RECEIPT_DETAIL_CLOSE
+    RECEIPT_DETAIL_CLOSE,
+    RECEIPT_SHOW_PENDING,
+    RECEIPT_SHOW_REJECTED,
+    RECEIPT_SHOW_ACCEPTED
 } from '../constants';
 import { database } from '../config/firebase';
 
@@ -78,5 +81,26 @@ export function handleDetails() {
 export function handleDetailsClose() {
   return {
     type: RECEIPT_DETAIL_CLOSE
+  }
+}
+
+export function showPending(receipts) {
+  return {
+    type: RECEIPT_SHOW_PENDING,
+    payload: receipts
+  }
+}
+
+export function showRejected(receipts) {
+  return {
+    type: RECEIPT_SHOW_REJECTED,
+    payload: receipts
+  }
+}
+
+export function showAccepted(receipts) {
+  return {
+    type: RECEIPT_SHOW_ACCEPTED,
+    payload: receipts
   }
 }

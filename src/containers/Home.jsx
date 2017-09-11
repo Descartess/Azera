@@ -44,12 +44,32 @@ class Home extends Component {
     this.props.receiptActions.handleDetailsClose();
   }
 
-  showPending() {
-    this.props.receiptActions.showPending();
+  showPending(receipts) {
+    this.props.receiptActions.showPending(this.filterReceiptsOnStatus(receipts, 'pending'));
+  }
+
+  showRejected(receipts) {
+    this.props.receiptActions.showRejected(this.filterReceiptsOnStatus(receipts, 'rejected'));
+  }
+
+  showAccepted(receipts) {
+    this.props.receiptActions.showAccepted(this.filterReceiptsOnStatus(receipts, 'accepted'));
+  }
+
+  filterReceiptsOnStatus(receipts, status) {
+    return _.filter(receipts, (receipt) => ( receipt['status'] === status ));
+  }
+
+  loadAllReceipts() {
+    this.props.receiptActions.getReceipts();
   }
 
   componentWillMount() {
-    this.props.receiptActions.getReceipts();
+    this.loadAllReceipts();
+  }
+
+  componentDidMount() {
+
   }
 
   render() {
@@ -81,13 +101,15 @@ class Home extends Component {
       <Grid className="full-height">
         <Grid.Column width={3} className="column1">
           <Grid.Row>
-            <div className="logo">
+            <div className="logo" onClick={this.loadAllReceipts.bind(this)}>
               <p>AZERA</p>
             </div>
           </Grid.Row>
           <StatsHolder
               data={receipt_stats}
-              showPending={this.showPending.bind(this)}
+              showPending={this.showPending.bind(this, receipts_array)}
+              showRejected={this.showRejected.bind(this, receipts_array)}
+              showAccepted={this.showAccepted.bind(this, receipts_array)}
           />
         </Grid.Column >
         <Grid.Column width={13} className="column2">
@@ -134,17 +156,30 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-  const receipts_obj = state.receipts.toJS();
+  const all_receipts = state.receipts.toJS();
   const { START, END } = state.pages;
-  const { receipts } = receipts_obj;
-  const receipts_array = _.map(receipts, (val, uid) => (
-    { ...val, uid }
-  ));
+  const { receipts } = all_receipts;
+  let receipts_array = null;
+
+  if (all_receipts.showPending)
+    receipts_array = _.map(receipts.pendingReceipts, (val, uid) => ({...val, uid}));
+  else if (all_receipts.showRejected)
+    receipts_array = _.map(receipts.rejectedReceipts, (val, uid) => ({...val, uid}));
+  else if (all_receipts.showAccepted)
+    receipts_array = _.map(receipts.acceptedReceipts, (val, uid) => ({...val, uid}));
+  else
+    receipts_array = _.map(receipts, (val, uid) => ({ ...val, uid }));
+
   const receipt_stats = _.countBy(receipts, c => c.status);
-  const showAccept = state.receipts.toJS().showAccept;
-  const showReject = state.receipts.toJS().showReject;
-  const showDetails = state.receipts.toJS().showDetails;
-  const selectedReceipt = state.receipts.toJS().selectedReceipt;
+  const showAccept = all_receipts.showAccept;
+  const showReject = all_receipts.showReject;
+  const showDetails = all_receipts.showDetails;
+  const selectedReceipt = all_receipts.selectedReceipt;
+
+  const showPending = all_receipts.showPending;
+  const showAccepted = all_receipts.showAccepted;
+  const showRejected = all_receipts.showRejected;
+
   return {
     receipts_array,
     receipt_stats,
@@ -153,7 +188,11 @@ function mapStateToProps(state) {
     START,
     END,
     showDetails,
-    selectedReceipt
+    selectedReceipt,
+
+    showPending,
+    showAccepted,
+    showRejected
   };
 }
 

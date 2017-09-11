@@ -8,9 +8,15 @@ const StatsHolder = (props) => {
   }
   return (
     <div className="left-bar">
-      <Stats value={props.data.pending} label={'Pending'} showPending={props.showPending}/>
-      <Stats value={props.data.accepted} label={'Accepted'} className="pointer"/>
-      <Stats value={props.data.rejected} label={'Rejected'} className="pointer"/>
+      <a onClick={props.showPending}>
+          <Stats value={props.data.pending} label={'Pending'}/>
+      </a>
+      <a onClick={props.showAccepted}>
+          <Stats value={props.data.accepted} label={'Accepted'}/>
+      </a>
+      <a onClick={props.showRejected}>
+          <Stats value={props.data.rejected} label={'Rejected'}/>
+      </a>
     </div>
   );
 };

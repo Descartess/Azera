@@ -8,7 +8,10 @@ import {
     REJECT_RECEIPT_CLOSE,
     REJECT_RECEIPT_CONFIRM,
     RECEIPT_DETAILS,
-    RECEIPT_DETAIL_CLOSE
+    RECEIPT_DETAIL_CLOSE,
+    RECEIPT_SHOW_PENDING,
+    RECEIPT_SHOW_REJECTED,
+    RECEIPT_SHOW_ACCEPTED
 } from '../constants';
 
 
@@ -18,6 +21,11 @@ const initialState = Map({
   showReject: false,
   selectedReceipt: null,
   showDetails: false,
+  showPending: false,
+  showRejected: false,
+  pendingReceipts: List(),
+  rejectedReceipts: List(),
+  acceptedReceipts: List()
 });
 
 export default(state = initialState, action) => {
@@ -26,6 +34,12 @@ export default(state = initialState, action) => {
       return (
         state.merge(Map({
           receipts: fromJS(action.payload),
+          showAccepted: false,
+          showPending: false,
+          showRejected: false,
+          pendingReceipts: List(),
+          rejectedReceipts: List(),
+          acceptedReceipts: List()
         }))
       );
     case ACCEPT_RECEIPT_REQUEST:
@@ -83,6 +97,39 @@ export default(state = initialState, action) => {
               showDetails: false
           }))
       );
+    case RECEIPT_SHOW_PENDING:
+        return (
+            state.merge(Map({
+               showAccepted: false,
+               showPending: true,
+               showRejected: false,
+               pendingReceipts: action.payload,
+               rejectedReceipts: null,
+               acceptedReceipts: null
+            }))
+        );
+    case RECEIPT_SHOW_REJECTED:
+        return (
+            state.merge(Map({
+               showAccepted: false,
+               showRejected: true,
+               showPending: false,
+               pendingReceipts: null,
+               rejectedReceipts: action.payload,
+               acceptedReceipts: null
+            }))
+        );
+    case RECEIPT_SHOW_ACCEPTED:
+        return (
+            state.merge(Map({
+               showAccepted: true,
+               showRejected: false,
+               showPending: false,
+               pendingReceipts: null,
+               rejectedReceipts: null,
+               acceptedReceipts: action.payload
+            }))
+        );
     default:
       return state;
   }
