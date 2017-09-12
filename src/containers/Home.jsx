@@ -36,8 +36,8 @@ class Home extends Component {
     this.props.receiptActions.confirmRejection(this.props.selectedReceipt);
   }
 
-  handleDetails() {
-    this.props.receiptActions.handleDetails();
+  handleDetails(receipt) {
+    this.props.receiptActions.handleDetails(receipt);
   }
 
   handleDetailsClose() {
@@ -71,7 +71,7 @@ class Home extends Component {
               handleReject={this.handleReject.bind(this, receipt)}
               handleRejectClose={this.handleRejectClose.bind(this)}
               confirmRejection={this.confirmRejection.bind(this, receipt)}
-              handleDetails={this.handleDetails.bind(this)}
+              handleDetails={this.handleDetails.bind(this, receipt)}
               handleDetailsClose={this.handleDetailsClose.bind(this)}
           />
         </Grid.Column>
