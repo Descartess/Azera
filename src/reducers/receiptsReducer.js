@@ -68,19 +68,21 @@ export default(state = initialState, action) => {
       return (
         state.merge(Map({
           showReject: false,
-          selectedReceipt: null,
+          selectedReceipt: null
         }))
       );
     case RECEIPT_DETAILS:
         return (
             state.merge(Map({
-                showDetails: true
+                showDetails: true,
+                selectedReceipt: action.payload
             }))
         );
     case RECEIPT_DETAIL_CLOSE:
       return (
           state.merge(Map({
-              showDetails: false
+              showDetails: false,
+              selectedReceipt: null
           }))
       );
     default:

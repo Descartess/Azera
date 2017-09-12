@@ -69,9 +69,10 @@ export function confirmRejection(receipt) {
   }
 }
 
-export function handleDetails() {
+export function handleDetails(receipt) {
   return {
-    type: RECEIPT_DETAILS
+    type: RECEIPT_DETAILS,
+    payload: receipt
   }
 }
 

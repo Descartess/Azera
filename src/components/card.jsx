@@ -8,7 +8,7 @@ import ReceiptDetail from './receiptDetail';
 const ReceiptCard = (props) => (
     <div>
         <Card>
-            <Image src={props.imageUrl} className="ui medium image"/>
+            <Image src={props.imageUrl} className="ui fluid image cropped"/>
             <Card.Content>
                 <Icon className="right floated close red circular icon pointer"
                       onClick={props.handleReject} title="Reject"/>

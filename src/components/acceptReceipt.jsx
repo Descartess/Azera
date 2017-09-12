@@ -15,10 +15,10 @@ const AcceptReceipt = (props) => (
                 </div>
             </Modal.Content>
             <Modal.Actions>
-                <Button negative onClick={props.handleAcceptClose}>
+                <Button color='red' inverted onClick={props.handleAcceptClose}>
                     Close
                 </Button>
-                <Button className="ui violet button" onClick={props.confirmAccept}>
+                <Button className="ui violet button inverted" onClick={props.confirmAccept}>
                     Confirm
                 </Button>
             </Modal.Actions>
