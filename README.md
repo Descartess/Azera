@@ -35,4 +35,13 @@ npm start
 * Users can signout of application
 * Users can reset passwords
 
+## Screenshots
 
+### Login
+![Login page](public/screenshots/login.png?raw=true "Login Page")
+
+### Landing Page
+![Landing page](public/screenshots/landing_page.png?raw=true "Landing Page")
+
+### Confirm accept
+![Confirm accept dialogue](public/screenshots/confirm_accept.png?raw=true "Confirm accept dialogue")
